@@ -9,13 +9,13 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home,
-      redirect:{path:'/about'}
+     // redirect:{path:'/about'}
     },
     {
-      path: '/about',
+      path: '/',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

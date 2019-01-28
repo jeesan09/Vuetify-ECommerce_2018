@@ -13,7 +13,7 @@
                   <v-btn
                     icon
                     large
-                    :href="source"
+                    href="#"
                     target="_blank"
                     slot="activator"
                   >
@@ -23,12 +23,13 @@
                 </v-tooltip>
               </v-toolbar>
               <v-card-text>
-                <v-form>
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
+                <v-form  ref="form">
+                  <v-text-field prepend-icon="person" name="login" label="Login" type="text" v-model="User.email" :rules="emailRules"></v-text-field>
+                  <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"v-model="User.password" :rules="passwordrules"></v-text-field>
                 </v-form>
               </v-card-text>
-
+                  <v-spacer />
+                    <p  v-show="status" v-text="news" style="text-align: center; color: red;"></p>
                   <v-card-actions>
                     <v-btn left color="primary">Register</v-btn>
                     <v-spacer />
@@ -51,35 +52,80 @@
 <script>
    import axios from 'axios'
  export default {
+
+
     data: () => ({
        articles: [],
+       status:false,
+       news:'Password or Emil does not match',
+     //  validaterule: false,
        User:{
-        email:'jeesan09iub@gmail.com',
-        password:'jeesan'
-       }
+        email:'',
+        password:''
+       },
+
+        passwordrules: [
+          (v) => !!v || 'Password is required',
+          (v) => v && v.length >= 5 || 'N must be more than 5 characters'
+        ],
+
+       emailRules: [
+          (v) => !!v || 'E-mail is required',
+          (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
+         
+        ]        
+
     }),
+
+
     methods: {
-          fetchArticles: function () {
+        fetchArticles: function () {
+       
+        this.$refs.form.validate(); // this line validate the filds are filled up correctly
+       // console.log( this.$refs.form.validate());
+        console.log(this.User.email,this.User.password);
 
-            console.log(this.User.email,this.User.password);
 
+        axios.post('http://localhost:8000/api/auth/login',{
 
-          axios.post('http://localhost:8000/api/auth/login',{
-          email:this.User.email,
-          password:this.User.password
+        email:this.User.email,
+        password:this.User.password
+
         }).then((response) => {
-          this.articles = response.data
-         // console.log(this.articles);
+
+          this.success_response(response)
+
 
         }, (error) => {
-          console.log(error)
+
+        if(this.$refs.form.validate()){
+          console.log(error);
+          this.catch_error();
+
+        }
+
+        //  alert("Password and email does NOt Match");
         })
       },
 
-      source(){
+      success_response(response){
+       
+         this.articles = response.data;
+ 
+         this.$router.push('/home');
+      },
 
+      catch_error(){
+
+          
+          this.status=true;
+          //resetting field Values
+/*          this.User.email='';
+          this.User.password='';*/
 
       }
+
+
     }
 
 }
