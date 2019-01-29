@@ -2,36 +2,54 @@
   <div class="about">
      <v-app id="inspire">
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid  >
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Login form</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-tooltip bottom>
-                  <v-btn
-                    icon
-                    large
-                    href="#"
-                    target="_blank"
-                    slot="activator"
-                  >
-                    <v-icon large>code</v-icon>
-                  </v-btn>
-                  <span>Source</span>
-                </v-tooltip>
               </v-toolbar>
               <v-card-text>
+
                 <v-form  ref="form">
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text" v-model="User.email" :rules="emailRules"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"v-model="User.password" :rules="passwordrules"></v-text-field>
+                  <v-text-field
+                     prepend-icon="person"
+                     name="login"
+                     label="Login" 
+                     type="text" 
+                     v-model="User.email" 
+                     :rules="emailRules">                   
+                   </v-text-field>
+                  <v-text-field
+                      prepend-icon="lock"
+                      name="password"
+                      label="Password"
+                      id="password" 
+                      type="password"
+                      v-model="User.password"
+                     :rules="passwordrules"> 
+                  </v-text-field>
                 </v-form>
+
               </v-card-text>
-                  <v-spacer />
+
+
+<!--   <v-spacer />
+        <v-alert
+          v-show="status"
+          type="error"
+          v-text="news"
+          class="text-md-center"
+        >
+         
+        </v-alert> -->
+                   <v-spacer /> 
+
                     <p  v-show="status" v-text="news" style="text-align: center; color: red;"></p>
+                   
                   <v-card-actions>
-                    <v-btn left color="primary">Register</v-btn>
+                    <v-btn left color="primary" v-on:click="registation">Register</v-btn>
                     <v-spacer />
                     <v-btn v-on:click="fetchArticles" right color="primary">Login</v-btn>
                   </v-card-actions>
@@ -43,9 +61,24 @@
             </v-card>
           </v-flex>
         </v-layout>
+         
+
+         <v-layout align-center justify-center style="margin-top: 50px;">
+
+
+             <v-flex xs12 sm8 md4>
+             
+                    <v-btn v-on:click="google_login" depressed  large color="error" style="width: 100%;">Google</v-btn>
+                    <v-btn depressed  large color=#3b5998 style="width: 100%; color:white;">faceBook</v-btn>
+            </v-flex>
+         </v-layout>
+
       </v-container>
     </v-content>
+
   </v-app>
+
+
   </div>
 </template>
 
@@ -66,7 +99,7 @@
 
         passwordrules: [
           (v) => !!v || 'Password is required',
-          (v) => v && v.length >= 5 || 'N must be more than 5 characters'
+          (v) => v && v.length >= 5 || 'Password must be more than 5 characters'
         ],
 
        emailRules: [
@@ -123,7 +156,33 @@
 /*          this.User.email='';
           this.User.password='';*/
 
+      },
+
+      google_login(){
+
+        console.log('button Pressed');
+        axios.get('http://localhost:8000/api/products').then((response) => {
+
+         
+
+
+        }, (error) => {
+
+
+
+
+        })
+
+      },
+
+      registation(){
+
+
+           this.$router.push('/registation');
+
       }
+
+
 
 
     }
@@ -132,3 +191,8 @@
 
 
 </script>
+<style type="text/css">
+  
+
+
+</style>
