@@ -18,18 +18,25 @@
                      name="name"
                      label="Name" 
                      type="text" 
-                     
+                     v-model="User.Name"
                      >                   
                    </v-text-field>
 
                   <v-text-field
+                     autofocus
                      prepend-icon="email"
-                     name=""
+                     name="email"
                      label="Email" 
                      type="text" 
-                    
-                     >                   
+                     v-model="User.Email"
+                     :rules="emailRules"
+
+                     >    
+                     
+                                    
                    </v-text-field>
+                    <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
+                  
 
                   <v-text-field
                       prepend-icon="lock"
@@ -37,6 +44,8 @@
                       label="Password"
                       id="" 
                       type="password"
+                      v-model="User.Password"
+                      :rules="passwordrules"
                      
                      > 
                   </v-text-field>
@@ -45,34 +54,25 @@
                       prepend-icon="lock"
                       name="Confirm_password"
                       label="Confirm Password"
-                      id="" 
+                      id="Confirm_password" 
                       type="password"
-                      
+                      v-model="User.Confirm_password"
+                      :rules=" Confirm_password_Rules"
                      > 
                   </v-text-field>
-
+                   <v-spacer />
+                  <p  v-show="status" v-text="news" style="text-align: center; color: red;"></p>
 
 
                 </v-form>
 
-            </v-card-text>
+                  </v-card-text>
 
 
-<!--   <v-spacer />
-        <v-alert
-          v-show="status"
-          type="error"
-          v-text="news"
-          class="text-md-center"
-        >
-         
-        </v-alert> -->
-                  
-
-                   
+                 
                    
                   <v-card-actions>
-                    <v-btn left color="primary">Register</v-btn>
+                    <v-btn left color="primary" v-on:click="saveData">Register</v-btn>
                    <v-spacer />
                    
                   </v-card-actions>
@@ -98,8 +98,94 @@
     },
 
      data: () => ({
-     
-     
-    })   
+ /*      password:'',*/
+
+       status:false,
+       news:'password Doesnt match',
+       User:{
+         
+         Name:'',
+         Email:'',
+         Password:'',
+         Confirm_password:''
+
+       },
+
+       passwordrules: [
+          (v) => !!v || 'Password is required',
+          (v) => v && v.length >= 5 || 'Password must be more than 5 characters'
+        ],
+
+       emailRules: [
+          (v) => !!v || 'E-mail is required',
+          (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
+         
+        ] ,
+
+        Confirm_password_Rules:[
+
+          (v) => !!v || 'Password required',  
+         /* (v) => v != this. || 'E-mail must match'*/
+     //     console.log(v),
+        /*  (v) => v== this.passwordval || 'Password Doesnt match'*/
+
+        ]
+        
+    }),
+
+    methods:{
+          
+          saveData(){
+
+              this.$refs.form.validate();
+              this.Confirm_password_funtion();
+              console.log(this.User.Password);
+
+      if(this.Confirm_password_funtion()==false){
+
+       axios.post('http://localhost:8000/api/auth/register',{
+
+        name:this.User.Name,
+        email:this.User.Email,
+        password:this.User.Password
+
+
+        }).then((response) => {
+
+          console.log(response);
+
+
+        }, (error) => {
+
+
+         })
+
+      }
+
+
+        },
+
+       
+      Confirm_password_funtion () { 
+        if(this.User.Password === this.User.Confirm_password) 
+          {
+            return this.status=false ;
+          }
+
+         else{
+
+            return this.status=true;
+         } 
+     }
+        
+/*        passwordval(){
+              
+              return this.User.Password;
+
+        }*/
+      
+    }
+
+
   }
 </script>

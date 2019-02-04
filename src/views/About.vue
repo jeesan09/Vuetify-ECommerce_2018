@@ -74,6 +74,9 @@
          </v-layout>
 
       </v-container>
+
+        
+
     </v-content>
 
   </v-app>
@@ -83,11 +86,18 @@
 </template>
 
 <script>
+
    import axios from 'axios'
+
  export default {
 
 
     data: () => ({
+
+    
+
+
+     
        articles: [],
        status:false,
        news:'Password or Emil does not match',
@@ -107,7 +117,7 @@
           (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
          
         ]        
-
+      
     }),
 
 
@@ -163,7 +173,7 @@
         console.log('button Pressed');
         axios.get('http://localhost:8000/api/products').then((response) => {
 
-         
+          console.log(response);
 
 
         }, (error) => {
