@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import registation from './components/registation.vue'
+import passwordReset from './components/passwordReset.vue'
+import resetPasswordConfirmButton from './components/resetPasswordConfirmButton'
 
 Vue.use(Router)
 
@@ -29,6 +31,25 @@ export default new Router({
       path: '/registation',
       name: 'registation',
       component: registation
+
+
+    },
+
+    {
+
+      path: '/PasswordReset',
+      name: 'PasswordReset',
+      component: passwordReset
+
+
+
+    },
+    {
+
+      path: '/ComfirmPassword',
+      name: '',
+      component: resetPasswordConfirmButton
+
 
 
     }

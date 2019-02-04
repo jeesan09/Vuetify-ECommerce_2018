@@ -25,7 +25,7 @@
                    </v-text-field>
 
                   <v-text-field
-                     autofocus
+                     
                      prepend-icon="email"
                      name="email"
                      label="Email" 

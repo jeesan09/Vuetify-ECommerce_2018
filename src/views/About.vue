@@ -56,7 +56,7 @@
 
                   <v-card-actions>
                      <v-spacer />
-                     <a href="" >Forget Password</a>
+                     <a href=""  @click="forgetPassword" >Forget Password</a>
                   </v-card-actions>
             </v-card>
           </v-flex>
@@ -207,6 +207,12 @@
 
 
            this.$router.push('/registation');
+
+      },
+
+      forgetPassword(){
+
+          this.$router.push('/PasswordReset');
 
       }
 
