@@ -68,8 +68,8 @@
 
              <v-flex xs12 sm8 md4>
              
-                    <v-btn v-on:click="google_login" depressed  large color="error" style="width: 100%;">Google</v-btn>
-                    <v-btn depressed  large color=#3b5998 style="width: 100%; color:white;">faceBook</v-btn>
+                    <v-btn @click="auth('google')" depressed  large color="error" style="width: 100%;">Google</v-btn>
+                    <v-btn @click="auth('facebook')"depressed  large color=#3b5998 style="width: 100%; color:white;">faceBook</v-btn>
             </v-flex>
          </v-layout>
 
@@ -184,7 +184,25 @@
         })
 
       },
+    auth(network) {
+      const hello = this.hello;
+      hello(network).login().then(() => {
+        const authRes = hello(network).getAuthResponse();
+        console.log(authRes);
+        /*
+          performs operations using the token from authRes
+        */
+        hello(network).api('me').then(function (json) {
+          const profile = json;
+          console.log(profile)
+          /*
+            performs operations using the user info from profile
+          */
 
+        });
+        this.$router.push('/home');
+      })
+    },
       registation(){
 
 
