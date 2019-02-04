@@ -14,11 +14,13 @@
 
                 <v-form  ref="form">
                   <v-text-field
+                     autofocus
                      prepend-icon="person"
                      name="name"
                      label="Name" 
                      type="text" 
                      v-model="User.Name"
+                     :rules="nameRules"
                      >                   
                    </v-text-field>
 
@@ -121,7 +123,10 @@
           (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
          
         ] ,
+        nameRules:[
+          (v) => !!v || 'Name is required',
 
+        ],
         Confirm_password_Rules:[
 
           (v) => !!v || 'Password required',  
@@ -135,13 +140,13 @@
 
     methods:{
           
-          saveData(){
+      saveData(){
 
               this.$refs.form.validate();
               this.Confirm_password_funtion();
               console.log(this.User.Password);
 
-      if(this.Confirm_password_funtion()==false){
+      if(this.Confirm_password_funtion()==false && this.$refs.form.validate()==true ){
 
        axios.post('http://localhost:8000/api/auth/register',{
 
@@ -154,13 +159,15 @@
 
           console.log(response);
 
+          this.afterRegistation();
+
 
         }, (error) => {
 
 
          })
 
-      }
+        }
 
 
         },
@@ -176,13 +183,15 @@
 
             return this.status=true;
          } 
-     }
+     },
         
-/*        passwordval(){
-              
-              return this.User.Password;
+     afterRegistation(){
 
-        }*/
+
+            this.$router.push('/');
+
+            console.log('succes');
+     }
       
     }
 
