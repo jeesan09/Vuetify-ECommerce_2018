@@ -60,6 +60,8 @@
 
 
 <script>
+import axios from 'axios'
+
   export default {
     data: () => ({
 
@@ -95,13 +97,29 @@
 
             }).then((response) => {
 
+
+            this.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Please Cheak your Mail To Reset Password',
+
+            })
+
               console.log(response);
 
              /* this.afterRegistation();*/
 
 
             }, (error) => {
+               
 
+              this.$swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'Please Provide a valid Email Address',
+
+              footer: 'Something went Wrong!'
+              })
 
              })
 

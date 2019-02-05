@@ -158,14 +158,30 @@
 
           console.log(response);
 
+          this.$swal({
+           // position: 'top-end',
+            type: 'success',
+            title: 'Your Password has been Reset SuccessFully',
 
-          this.$router.push('/');
+            }).then(()=>{
+              
+              this.$router.push('/');
+
+            })
+          
 
           
 
 
         }, (error) => {
+            
+          this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
 
+          footer: 'Email Or Token Doesnt match'
+          })
 
          })
 
