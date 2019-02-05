@@ -12,7 +12,7 @@
     >
       <v-img
         :aspect-ratio="16/9"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        src="http://localhost:8000/api/showp/56"
       ></v-img>
       <v-card-title>
         <div>

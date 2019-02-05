@@ -136,13 +136,24 @@
 
         }).then((response) => {
 
-          this.success_response(response)
-
-
+        //  this.success_response(response)
+         // this.$swal('login successfull');
+          this.alartWithSuccess();
+             
         }, (error) => {
 
         if(this.$refs.form.validate()){
           console.log(error);
+
+          this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 2000,
+          footer: 'Email and password does not match'
+          })
+
           this.catch_error();
 
         }
@@ -150,10 +161,24 @@
         //  alert("Password and email does NOt Match");
         })
       },
+      
+      alartWithSuccess(){
 
-      success_response(response){
+           this.$swal({
+            position: 'bottom-middle',
+            type: 'success',
+            title: 'successfully Logged in',
+            showConfirmButton: false,
+            timer: 2000
+            }).then(() =>{
+               this.success_response();
+           })
+
+
+      },
+      success_response(){
        
-         this.articles = response.data;
+        // this.articles = response.data;
  
          this.$router.push('/home');
       },
@@ -200,7 +225,7 @@
           */
 
         });
-        this.$router.push('/home');
+        this.alartWithSuccess();
       })
     },
       registation(){
