@@ -70,6 +70,7 @@
              
                     <v-btn @click="auth('google')" depressed  large color="error" style="width: 100%;">Google</v-btn>
                     <v-btn @click="auth('facebook')"depressed  large color=#3b5998 style="width: 100%; color:white;">faceBook</v-btn>
+                   <!--   <v-btn @click="google_login" depressed  large color="error" style="width: 100%;">Google</v-btn> -->
             </v-flex>
          </v-layout>
 

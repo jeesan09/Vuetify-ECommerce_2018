@@ -12,7 +12,7 @@
     >
       <v-img
         :aspect-ratio="16/9"
-        src="http://localhost:8000/storage/DB/a4093cbf7b7f8a0f997e047eb7f270b49fbd7e9a.png"
+        :src="url"
       ></v-img>
       <v-card-title>
         <div>
@@ -51,8 +51,31 @@
   export default {
     data: () => ({
       reviews: 413,
-      value: 4.5
-    })
+      value: 4.5,
+      url:''
+    }),
+
+  
+
+
+        mounted() {
+                 
+         //console.log('sdfsdfsfsafs');
+        axios.get('http://localhost:8000/api/showp/56').then((response) => {
+
+         console.log(response);
+         this.url=response.data;
+         console.log(this.url);
+
+
+        }, (error) => {
+
+
+
+
+        })
+               
+     }
   }
 </script>
 
