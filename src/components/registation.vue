@@ -159,11 +159,28 @@
 
           console.log(response);
 
-          this.afterRegistation();
+          this.$swal({
+            position: 'bottom-middle',
+            type: 'success',
+            title: 'Account was created successfully',
+            showConfirmButton: false,
+            timer: 2000
+            }).then(() =>{
+               this.afterRegistation();
+           })
+
+        //  this.afterRegistation();
 
 
         }, (error) => {
+             
+              this.$swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'Our server is temporary down',
 
+              footer: 'Something went Wrong!'
+              })
 
          })
 

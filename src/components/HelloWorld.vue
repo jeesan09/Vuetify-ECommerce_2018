@@ -12,7 +12,7 @@
     >
       <v-img
         :aspect-ratio="16/9"
-        src="http://localhost:8000/api/showp/56"
+        src="http://localhost:8000/storage/DB/a4093cbf7b7f8a0f997e047eb7f270b49fbd7e9a.png"
       ></v-img>
       <v-card-title>
         <div>
