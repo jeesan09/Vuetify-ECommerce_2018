@@ -3,11 +3,15 @@
 
 
 <template>
-  <v-hover style="margin-top: 50px;">
+<!--  <tr v-for="product in products">   -->
+
+ <div >
+  <div  v-for="product in products" style="float: left; margin-left: 30px;">
+   <v-hover style="margin-top: 50px;  "  >
     <v-card
       slot-scope="{ hover }"
       :class="`elevation-${hover ? 12 : 2}`"
-      class="mx-auto"
+      class=""
       width="344"
     >
       <v-img
@@ -39,6 +43,9 @@
       </v-card-title>
     </v-card>
   </v-hover>
+
+ </div>
+</div>
 </template>
 
 
@@ -49,23 +56,47 @@
 
 <script>
   export default {
-    data: () => ({
+/*    data: () => ({
       reviews: 413,
       value: 4.5,
-      url:''
-    }),
+      url:'',
+      products:{}
+    }),*/
 
-  
+      data() {
+        return {
+             reviews: 413,
+             value: 4.5,
+             url:'',
+             products:{}
+        };
+    },
 
 
         mounted() {
                  
          //console.log('sdfsdfsfsafs');
+
+        axios.get('http://localhost:8000/api/products').then((response) => {
+
+          //console.log(response);
+
+          this.products=response.data.data;
+
+          console.log(this.products);
+
+
+        }, (error) => {
+
+
+
+
+        })
         axios.get('http://localhost:8000/api/showp/56').then((response) => {
 
-         console.log(response);
+      //   console.log(response);
          this.url=response.data;
-         console.log(this.url);
+        // console.log(this.url);
 
 
         }, (error) => {
@@ -75,7 +106,14 @@
 
         })
                
-     }
+     },
+
+   methods: {
+
+
+
+   }
+
   }
 </script>
 
