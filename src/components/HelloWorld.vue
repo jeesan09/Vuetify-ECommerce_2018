@@ -16,14 +16,15 @@
     >
       <v-img
         :aspect-ratio="16/9"
-        :src="url"
+        :src="product.ImageUrl"
       ></v-img>
       <v-card-title>
         <div>
-          <span class="headline">Cafe Badilico</span>
+          <span class="headline">{{product.Name}}</span><br>
+          <span > <b>Price:</b> {{product.Price}}</span>
           <div class="d-flex">
             <v-rating
-              :value="value"
+              :value="product.Rating"
               color="amber"
               dense
               half-increments
@@ -31,8 +32,8 @@
               size="14"
             ></v-rating>
             <div class="ml-2 grey--text text--darken-2">
-              <span>{{ value }}</span>
-              <span>({{ reviews }})</span>
+              <span>{{ product.Rating }}</span>
+              <span>({{ product.Rating }})</span>
             </div>
           </div>
         </div>
