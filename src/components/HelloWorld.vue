@@ -4,10 +4,12 @@
 
 <template>
 <!--  <tr v-for="product in products">   -->
+ <v-container   grid-list-xl text-xs-center>
+    <v-layout  row wrap  >
 
- <div >
-  <div  v-for="product in products" style="float: left; margin-left: 30px;">
-   <v-hover style="margin-top: 50px;  "  >
+ <v-flex  xs12 sm12 md12 lg8 offset-xs0 offset-lg2 >
+  <div  v-for="product in products"  style="float: left;">
+   <v-hover style="margin-top: 50px; margin-left: 10px;  "  >
     <v-card
       slot-scope="{ hover }"
       :class="`elevation-${hover ? 12 : 2}`"
@@ -46,7 +48,10 @@
   </v-hover>
 
  </div>
-</div>
+ </v-flex>
+
+   </v-layout>
+ </v-container>
 </template>
 
 
