@@ -61,7 +61,7 @@
     <v-progress-circular
       :width="7"
       :size="90"
-      color="green"
+      color="amber"
       indeterminate
       v-show='status_loader'
     ></v-progress-circular>
@@ -153,6 +153,7 @@ import axios from 'axios'
 
             }, (error) => {
                
+               console.log(error);
               this.status_loader=false; 
               this.status_button=true;
               this.$swal.fire({
