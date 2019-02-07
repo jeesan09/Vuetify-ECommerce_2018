@@ -4,11 +4,12 @@
 
 <template>
 <!--  <tr v-for="product in products">   -->
- <v-container   grid-list-xl text-xs-center>
-    <v-layout  row wrap  >
+ <v-container   grid-list-xl >
+    <v-layout  align-center justify-center >
 
- <v-flex  xs12 sm12 md12 lg8 offset-xs0 offset-lg2 >
+ <v-flex  xs12 sm12 md12 lg8 offset-xs0  >
   <div  v-for="product in products"  style="float: left;">
+    <v-spacer></v-spacer>
    <v-hover style="margin-top: 50px; margin-left: 10px;  "  >
     <v-card
       slot-scope="{ hover }"
@@ -35,7 +36,7 @@
             ></v-rating>
             <div class="ml-2 grey--text text--darken-2">
               <span>{{ product.Rating }}</span>
-              <span>({{ product.Rating }})</span>
+              <span>({{ value }})</span>
             </div>
           </div>
         </div>
@@ -72,7 +73,7 @@
       data() {
         return {
              reviews: 413,
-             value: 4.5,
+             value: 5,
              url:'',
              products:{}
         };

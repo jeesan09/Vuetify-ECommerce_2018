@@ -61,7 +61,7 @@
             </v-card>
           </v-flex>
         </v-layout>
-         
+       <!--   <v-progress-circular :value="90"> </v-progress-circular>   intesrtin aspect -->
 
          <v-layout align-center justify-center style="margin-top: 50px;">
 
@@ -73,8 +73,11 @@
                    <!--   <v-btn @click="google_login" depressed  large color="error" style="width: 100%;">Google</v-btn> -->
             </v-flex>
          </v-layout>
+         
 
       </v-container>
+      
+
 
         
 
