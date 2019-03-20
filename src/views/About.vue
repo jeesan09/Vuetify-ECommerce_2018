@@ -17,7 +17,9 @@
                      prepend-icon="person"
                      name="login"
                      label="Login" 
+                      placeholder="Plese Enter ur Name"
                      type="text" 
+                    
                      v-model="User.email" 
                      :rules="emailRules">                   
                    </v-text-field>
@@ -25,6 +27,7 @@
                       prepend-icon="lock"
                       name="password"
                       label="Password"
+                      placeholder="Plese Enter ur Password"
                       id="password" 
                       type="password"
                       v-model="User.password"
@@ -248,7 +251,17 @@ import axios from 'axios'
 
 
 
-    }
+    },
+       mounted(){
+
+
+   
+        
+        console.log("i am called");
+
+ 
+
+   }
 
 }
 
